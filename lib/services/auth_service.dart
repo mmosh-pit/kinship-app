@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ai_app/models/auth_data.dart';
-import 'package:ai_app/utils/dio_client.dart';
+import 'package:bigagent/models/auth_data.dart';
+import 'package:bigagent/utils/dio_client.dart';
 import 'package:dio/dio.dart';
 
 class AuthService {

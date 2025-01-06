@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ai_app/utils/dio_client.dart';
-import 'package:ai_app/utils/helius_client.dart';
+import 'package:bigagent/utils/dio_client.dart';
+import 'package:bigagent/utils/helius_client.dart';
 
 class HeliusService {
   static final _client = HeliusClient();

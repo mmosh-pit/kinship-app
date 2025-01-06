@@ -1,4 +1,4 @@
-import 'package:ai_app/services/storage_service.dart';
+import 'package:bigagent/services/storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

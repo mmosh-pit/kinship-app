@@ -18,6 +18,7 @@ class Message {
         content: json["content"],
         type: json["type"],
         sender: json["sender"],
+        isLoading: json["is_loading"] ?? false,
       );
 
   Message copyWith({

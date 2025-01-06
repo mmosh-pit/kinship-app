@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:ai_app/models/message.dart';
-import 'package:ai_app/services/storage_service.dart';
+import 'package:bigagent/models/message.dart';
+import 'package:bigagent/services/storage_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -27,12 +27,7 @@ class SocketService {
         if (decodedData == "connected") return;
 
         if (decodedData["event"] == "aiMessage") {
-          final message = Message(
-            id: decodedData["data"]["id"],
-            content: decodedData["data"]["content"],
-            type: "bot",
-            sender: "",
-          );
+          final message = Message.fromJson(decodedData["data"]);
           _messagesController.add(message);
         } else {
           final message = Message.fromJson(decodedData);

@@ -1,10 +1,10 @@
-import 'package:ai_app/provider/auth_provider.dart';
-import 'package:ai_app/screens/enter_code_screen.dart';
-import 'package:ai_app/screens/home_screen.dart';
-import 'package:ai_app/screens/login_screen.dart';
-import 'package:ai_app/screens/select_login_screen.dart';
-import 'package:ai_app/screens/sign_up_screen.dart';
-import 'package:ai_app/utils/routes.dart';
+import 'package:bigagent/provider/auth_provider.dart';
+import 'package:bigagent/screens/enter_code_screen.dart';
+import 'package:bigagent/screens/home_screen.dart';
+import 'package:bigagent/screens/login_screen.dart';
+import 'package:bigagent/screens/select_login_screen.dart';
+import 'package:bigagent/screens/sign_up_screen.dart';
+import 'package:bigagent/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod/riverpod.dart';

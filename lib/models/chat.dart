@@ -1,5 +1,5 @@
-import 'package:ai_app/models/message.dart';
-import 'package:ai_app/models/participant.dart';
+import 'package:bigagent/models/message.dart';
+import 'package:bigagent/models/participant.dart';
 
 class Chat {
   final String id;

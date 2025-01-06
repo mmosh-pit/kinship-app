@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:ai_app/models/user_wallet_info.dart';
-import 'package:ai_app/services/helius_service.dart';
+import 'package:bigagent/models/user_wallet_info.dart';
+import 'package:bigagent/services/helius_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod/riverpod.dart';
 

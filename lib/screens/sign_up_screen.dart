@@ -1,6 +1,6 @@
-import 'package:ai_app/provider/auth_provider.dart';
-import 'package:ai_app/utils/routes.dart';
-import 'package:ai_app/widgets/common/molecules/custom_text_field.dart';
+import 'package:bigagent/provider/auth_provider.dart';
+import 'package:bigagent/utils/routes.dart';
+import 'package:bigagent/widgets/common/molecules/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';

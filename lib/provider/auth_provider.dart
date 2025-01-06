@@ -1,9 +1,9 @@
-import 'package:ai_app/models/auth_data.dart';
-import 'package:ai_app/models/user.dart';
-import 'package:ai_app/router/app_router.dart';
-import 'package:ai_app/services/auth_service.dart';
-import 'package:ai_app/services/storage_service.dart';
-import 'package:ai_app/utils/routes.dart';
+import 'package:bigagent/models/auth_data.dart';
+import 'package:bigagent/models/user.dart';
+import 'package:bigagent/router/app_router.dart';
+import 'package:bigagent/services/auth_service.dart';
+import 'package:bigagent/services/storage_service.dart';
+import 'package:bigagent/utils/routes.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class AuthProvider extends AsyncNotifier<AuthData> {

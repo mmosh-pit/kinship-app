@@ -1,5 +1,5 @@
-import 'package:ai_app/provider/chat_provider.dart';
-import 'package:ai_app/provider/socket_provider.dart';
+import 'package:bigagent/provider/chat_provider.dart';
+import 'package:bigagent/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,7 +54,11 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
           width: 1,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.only(
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.viewInsetsOf(context).bottom) *
+          0.90,
       child: Row(
         spacing: 10,
         children: [

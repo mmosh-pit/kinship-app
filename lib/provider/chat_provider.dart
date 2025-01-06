@@ -1,6 +1,6 @@
-import 'package:ai_app/models/chat.dart';
-import 'package:ai_app/models/message.dart';
-import 'package:ai_app/services/chat_service.dart';
+import 'package:bigagent/models/chat.dart';
+import 'package:bigagent/models/message.dart';
+import 'package:bigagent/services/chat_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChatProvider extends AsyncNotifier<Chat> {
@@ -42,17 +42,6 @@ class ChatProvider extends AsyncNotifier<Chat> {
       return;
     }
     state = AsyncValue.data(state.value!.addMessage(message));
-    state = AsyncValue.data(
-      state.value!.addMessage(
-        Message(
-          id: "",
-          content: "",
-          type: "bot",
-          sender: "",
-          isLoading: true,
-        ),
-      ),
-    );
   }
 }
 

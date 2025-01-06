@@ -1,4 +1,4 @@
-import 'package:ai_app/models/user.dart';
+import 'package:bigagent/models/user.dart';
 
 class AuthData {
   final bool isAuth;

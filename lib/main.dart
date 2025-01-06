@@ -1,5 +1,5 @@
-import 'package:ai_app/router/app_router.dart';
-import 'package:ai_app/utils/custom_theme.dart';
+import 'package:bigagent/router/app_router.dart';
+import 'package:bigagent/utils/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
     final goRouter = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Kinship Codes',
       theme: CustomTheme.defaultTheme,
       routerConfig: goRouter,
     );

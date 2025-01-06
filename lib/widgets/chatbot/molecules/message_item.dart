@@ -1,34 +1,23 @@
-import 'package:ai_app/models/message.dart';
+import 'package:bigagent/models/message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import "dart:math" as math;
-
-const names = ["Aunt Bea", "Uncle Psy"];
-const botImages = [
-  "https://storage.googleapis.com/mmosh-assets/aunt-bea.png",
-  "https://storage.googleapis.com/mmosh-assets/uncle-psy.png"
-];
 
 class MessageItem extends StatelessWidget {
   final Message message;
   final String participantImage;
+  final String participantName;
 
   const MessageItem({
     super.key,
     required this.message,
     required this.participantImage,
+    required this.participantName,
   });
-
-  int _getRandIndex() {
-    return math.Random().nextInt(2);
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isBot = message.type == "bot";
-
-    final idx = _getRandIndex();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -39,7 +28,7 @@ class MessageItem extends StatelessWidget {
         children: [
           if (isBot)
             CachedNetworkImage(
-              imageUrl: botImages[idx],
+              imageUrl: participantImage,
               imageBuilder: (context, imageProvider) => Container(
                 width: 40.0,
                 height: 40.0,
@@ -60,7 +49,7 @@ class MessageItem extends StatelessWidget {
               spacing: 5,
               children: [
                 Text(
-                  isBot ? names[idx] : "User",
+                  participantName,
                   style: theme.textTheme.bodyLarge,
                   textAlign: isBot ? TextAlign.start : TextAlign.end,
                 ),
