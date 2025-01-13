@@ -75,25 +75,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               children: [
                 HomeHeader(profileImage: _profileImage),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF181747),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    height: MediaQuery.sizeOf(context).height * 0.80,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    child: Column(
-                      children: [
-                        const ChatbotHeader(),
-                        ChatbotMessagesList(
-                          profileImage: _profileImage,
-                          guestProfileImage: _guestProfileImage,
-                          participantName: _participantName,
-                        ),
-                      ],
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF181747),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      height: MediaQuery.sizeOf(context).height * 0.80,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 5),
+                      child: Column(
+                        children: [
+                          const ChatbotHeader(),
+                          ChatbotMessagesList(
+                            profileImage: _profileImage,
+                            guestProfileImage: _guestProfileImage,
+                            participantName: _participantName,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )

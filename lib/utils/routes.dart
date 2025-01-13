@@ -7,8 +7,8 @@ class Routes {
 
   static const homeRoute = "/$home";
 
-  static const mainRoute = "/$login";
-  static const loginRoute = "/$login";
+  static const mainRoute = "/$main";
+  static const loginRoute = "$mainRoute/$login";
   static const signupRoute = "$mainRoute/$signup";
   static const codeRoute = "$signupRoute/$code";
 }

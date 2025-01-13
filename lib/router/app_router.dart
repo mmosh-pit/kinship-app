@@ -46,37 +46,37 @@ GoRouter router(Ref ref) {
   final router = GoRouter(
     navigatorKey: routerKey,
     refreshListenable: isAuth,
-    initialLocation: Routes.loginRoute,
+    initialLocation: Routes.mainRoute,
     debugLogDiagnostics: true,
     routes: [
-      GoRoute(
-        path: Routes.loginRoute,
-        builder: (_, __) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: Routes.homeRoute,
-        builder: (_, __) => const HomeScreen(),
-      )
       // GoRoute(
-      //   path: Routes.mainRoute,
-      //   builder: (_, __) => const SelectLoginScreen(),
-      //   routes: [
-      //     GoRoute(
-      //       path: Routes.login,
-      //       builder: (_, __) => const LoginScreen(),
-      //     ),
-      //     GoRoute(
-      //       path: Routes.signup,
-      //       builder: (_, __) => const SignUpScreen(),
-      //       routes: [
-      //         GoRoute(
-      //           path: Routes.code,
-      //           builder: (_, __) => const EnterCodeScreen(),
-      //         )
-      //       ],
-      //     ),
-      //   ],
+      //   path: Routes.loginRoute,
+      //   builder: (_, __) => const LoginScreen(),
       // ),
+      // GoRoute(
+      //   path: Routes.homeRoute,
+      //   builder: (_, __) => const HomeScreen(),
+      // )
+      GoRoute(
+        path: Routes.mainRoute,
+        builder: (_, __) => const SelectLoginScreen(),
+        routes: [
+          GoRoute(
+            path: Routes.login,
+            builder: (_, __) => const LoginScreen(),
+          ),
+          GoRoute(
+            path: Routes.signup,
+            builder: (_, __) => const SignUpScreen(),
+            routes: [
+              GoRoute(
+                path: Routes.code,
+                builder: (_, __) => const EnterCodeScreen(),
+              )
+            ],
+          ),
+        ],
+      ),
     ],
     redirect: (context, state) {
       if ((!isAuth.value.hasValue && !isAuth.value.isLoading)) {

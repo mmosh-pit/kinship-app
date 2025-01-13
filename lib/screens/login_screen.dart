@@ -1,8 +1,10 @@
 import 'package:bigagent/provider/auth_provider.dart';
+import 'package:bigagent/utils/routes.dart';
 import 'package:bigagent/widgets/common/molecules/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -135,7 +137,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed("/sign-up");
+                              GoRouter.of(context).push(Routes.signupRoute);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: theme.colorScheme.tertiary,
