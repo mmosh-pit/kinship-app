@@ -45,6 +45,8 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
     final isLoading = provider.isLoading;
     final hasError = provider.hasError;
 
+    final isLoadingData = provider.value?.messages.last.isLoading ?? false;
+
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFBBBBBB).withValues(alpha: 0.21),
@@ -66,7 +68,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
         children: [
           Expanded(
             child: TextField(
-              enabled: !hasError || !isLoading,
+              enabled: (!hasError || !isLoading) && !isLoadingData,
               controller: _controller,
               onSubmitted: (value) {
                 ref.read(socketProvider).sendMessage(
@@ -89,6 +91,9 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
           ),
           ElevatedButton(
             onPressed: () {
+              if (isLoadingData) return;
+              FocusManager.instance.primaryFocus?.unfocus();
+
               ref
                   .read(socketProvider)
                   .sendMessage({"data": _controller.text, "event": "message"});

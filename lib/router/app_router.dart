@@ -49,14 +49,10 @@ GoRouter router(Ref ref) {
     initialLocation: Routes.mainRoute,
     debugLogDiagnostics: true,
     routes: [
-      // GoRoute(
-      //   path: Routes.loginRoute,
-      //   builder: (_, __) => const LoginScreen(),
-      // ),
-      // GoRoute(
-      //   path: Routes.homeRoute,
-      //   builder: (_, __) => const HomeScreen(),
-      // )
+      GoRoute(
+        path: Routes.homeRoute,
+        builder: (_, __) => const HomeScreen(),
+      ),
       GoRoute(
         path: Routes.mainRoute,
         builder: (_, __) => const SelectLoginScreen(),

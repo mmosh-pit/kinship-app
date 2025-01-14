@@ -1,6 +1,7 @@
 import 'package:bigagent/models/message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class MessageItem extends StatelessWidget {
   final Message message;
@@ -54,11 +55,12 @@ class MessageItem extends StatelessWidget {
                   textAlign: isBot ? TextAlign.start : TextAlign.end,
                 ),
                 if (!message.isLoading)
-                  Text(
-                    message.content,
-                    style: theme.textTheme.bodyMedium,
-                    textAlign: isBot ? TextAlign.start : TextAlign.end,
-                    overflow: TextOverflow.visible,
+                  Align(
+                    alignment:
+                        isBot ? Alignment.centerLeft : Alignment.centerRight,
+                    child: MarkdownBody(
+                      data: message.content,
+                    ),
                   ),
                 if (message.isLoading)
                   const Padding(
