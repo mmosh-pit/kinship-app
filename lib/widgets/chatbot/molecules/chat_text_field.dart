@@ -45,7 +45,8 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
     final isLoading = provider.isLoading;
     final hasError = provider.hasError;
 
-    final isLoadingData = provider.value?.messages.last.isLoading ?? false;
+    final isLoadingData =
+        provider.value?.messages.lastOrNull?.isLoading ?? false;
 
     return Container(
       decoration: BoxDecoration(

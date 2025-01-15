@@ -81,7 +81,8 @@ class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
                           : widget.guestProfileImage;
 
                       final botUser = chat.participants.firstWhere(
-                          (e) => e.id == chat.messages[index].sender);
+                        (e) => e.id == chat.messages[index].sender,
+                      );
 
                       final botImage = botUser.picture;
                       final botName = botUser.name;

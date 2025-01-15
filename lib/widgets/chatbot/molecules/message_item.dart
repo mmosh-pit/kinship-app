@@ -55,11 +55,11 @@ class MessageItem extends StatelessWidget {
                   textAlign: isBot ? TextAlign.start : TextAlign.end,
                 ),
                 if (!message.isLoading)
-                  Align(
-                    alignment:
-                        isBot ? Alignment.centerLeft : Alignment.centerRight,
-                    child: MarkdownBody(
-                      data: message.content,
+                  MarkdownBody(
+                    data: message.content,
+                    styleSheet: MarkdownStyleSheet(
+                      textAlign:
+                          isBot ? WrapAlignment.start : WrapAlignment.end,
                     ),
                   ),
                 if (message.isLoading)

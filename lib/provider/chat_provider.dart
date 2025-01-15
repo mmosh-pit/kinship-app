@@ -9,7 +9,7 @@ class ChatProvider extends AsyncNotifier<Chat> {
       final response = await ChatService.getChat();
 
       return response;
-    } catch (_) {
+    } catch (err) {
       return Chat.empty();
     }
   }
