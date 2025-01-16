@@ -19,6 +19,18 @@ class MyApp extends ConsumerWidget {
     final goRouter = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
+      builder: (context, child) {
+        final MediaQueryData data = MediaQuery.of(context);
+        return MediaQuery(
+          data: data.copyWith(
+            textScaler: data.textScaler.clamp(
+              minScaleFactor: 1,
+              maxScaleFactor: 1.4,
+            ),
+          ),
+          child: child!,
+        );
+      },
       title: 'Kinship Codes',
       theme: CustomTheme.defaultTheme,
       routerConfig: goRouter,

@@ -58,9 +58,12 @@ class MessageItem extends StatelessWidget {
                   MarkdownBody(
                     data: message.content,
                     styleSheet: MarkdownStyleSheet(
-                      textAlign:
-                          isBot ? WrapAlignment.start : WrapAlignment.end,
-                    ),
+                        textAlign:
+                            isBot ? WrapAlignment.start : WrapAlignment.end,
+                        textScaler: MediaQuery.textScalerOf(context).clamp(
+                          minScaleFactor: 1,
+                          maxScaleFactor: 1.25,
+                        )),
                   ),
                 if (message.isLoading)
                   const Padding(

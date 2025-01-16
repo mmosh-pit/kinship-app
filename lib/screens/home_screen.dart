@@ -65,42 +65,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                HomeHeader(profileImage: _profileImage),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF181747),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      height: MediaQuery.sizeOf(context).height * 0.80,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 5),
-                      child: Column(
-                        children: [
-                          const ChatbotHeader(),
-                          ChatbotMessagesList(
-                            profileImage: _profileImage,
-                            guestProfileImage: _guestProfileImage,
-                            participantName: _participantName,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF181747),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          height: MediaQuery.sizeOf(context).height * 0.80,
+          padding: const EdgeInsets.only(
+            bottom: 10,
+          ),
+          child: Column(
+            children: [
+              const ChatbotHeader(),
+              ChatbotMessagesList(
+                profileImage: _profileImage,
+                guestProfileImage: _guestProfileImage,
+                participantName: _participantName,
+              ),
+            ],
           ),
         ),
       ),

@@ -1,10 +1,13 @@
 import 'package:bigagent/provider/auth_provider.dart';
+import 'package:bigagent/screens/agents_screen.dart';
 import 'package:bigagent/screens/enter_code_screen.dart';
 import 'package:bigagent/screens/home_screen.dart';
 import 'package:bigagent/screens/login_screen.dart';
 import 'package:bigagent/screens/select_login_screen.dart';
 import 'package:bigagent/screens/sign_up_screen.dart';
+import 'package:bigagent/screens/subscriptions_screen.dart';
 import 'package:bigagent/utils/routes.dart';
+import 'package:bigagent/widgets/scaffold_with_nested_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod/riverpod.dart';
@@ -30,6 +33,12 @@ GoRouter? appRouter;
 @riverpod
 GoRouter router(Ref ref) {
   final routerKey = GlobalKey<NavigatorState>(debugLabel: 'routerKey');
+
+  final homeKey = GlobalKey<NavigatorState>(debugLabel: 'homeKey');
+  final agentsKey = GlobalKey<NavigatorState>(debugLabel: 'agentsKey');
+  final subscriptionsKey =
+      GlobalKey<NavigatorState>(debugLabel: "subscriptionsKey");
+
   final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
   ref
     ..onDispose(isAuth.dispose) // don't forget to clean after yourselves (:
@@ -49,9 +58,39 @@ GoRouter router(Ref ref) {
     initialLocation: Routes.mainRoute,
     debugLogDiagnostics: true,
     routes: [
-      GoRoute(
-        path: Routes.homeRoute,
-        builder: (_, __) => const HomeScreen(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, shell) => ScaffoldWithNestedNavigation(
+          shell: shell,
+        ),
+        branches: [
+          StatefulShellBranch(
+            navigatorKey: homeKey,
+            routes: [
+              GoRoute(
+                path: Routes.homeRoute,
+                builder: (_, __) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: agentsKey,
+            routes: [
+              GoRoute(
+                path: Routes.agentsRoute,
+                builder: (_, __) => const AgentsScreen(),
+              )
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: subscriptionsKey,
+            routes: [
+              GoRoute(
+                path: Routes.subscriptionsRoute,
+                builder: (_, __) => const SubscriptionsScreen(),
+              )
+            ],
+          ),
+        ],
       ),
       GoRoute(
         path: Routes.mainRoute,
