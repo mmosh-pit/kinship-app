@@ -1,5 +1,7 @@
+import 'package:bigagent/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeDrawerSettingsItem extends StatefulWidget {
   const HomeDrawerSettingsItem({super.key});
@@ -163,7 +165,10 @@ class _HomeDrawerSettingsItemState extends State<HomeDrawerSettingsItem>
                     SizedBox(
                       height: 40,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Scaffold.of(context).closeDrawer();
+                          GoRouter.of(context).push(Routes.deleteAccountRoute);
+                        },
                         child: Text(
                           "Delete Account",
                           style: theme.textTheme.titleSmall!.copyWith(

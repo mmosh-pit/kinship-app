@@ -1,3 +1,4 @@
+import 'package:bigagent/utils/routes.dart';
 import 'package:bigagent/widgets/chatbot/molecules/home_header.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -21,6 +22,10 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final location = GoRouterState.of(context).fullPath ?? "";
+
+    final isHomeHeaderVisible = !location.contains(Routes.deleteAccountRoute);
+
     return Scaffold(
       drawer: Drawer(
         width: MediaQuery.sizeOf(context).width * 0.90,
@@ -79,7 +84,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const HomeHeader(),
+            Visibility(visible: isHomeHeaderVisible, child: const HomeHeader()),
             shell,
           ],
         ),

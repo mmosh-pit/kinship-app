@@ -1,5 +1,6 @@
 import 'package:bigagent/provider/auth_provider.dart';
 import 'package:bigagent/screens/agents_screen.dart';
+import 'package:bigagent/screens/delete_account_screen.dart';
 import 'package:bigagent/screens/enter_code_screen.dart';
 import 'package:bigagent/screens/home_screen.dart';
 import 'package:bigagent/screens/login_screen.dart';
@@ -69,6 +70,12 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: Routes.homeRoute,
                 builder: (_, __) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: Routes.deleteAccount,
+                    builder: (_, __) => const DeleteAccountScreen(),
+                  ),
+                ],
               ),
             ],
           ),
