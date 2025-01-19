@@ -62,7 +62,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
         right: 10,
       ),
       margin: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
+        bottom: MediaQuery.viewInsetsOf(context).bottom * 0.95,
       ),
       child: Row(
         spacing: 10,
@@ -72,6 +72,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
               enabled: (!hasError || !isLoading) && !isLoadingData,
               controller: _controller,
               onSubmitted: (value) {
+                if (_controller.text.isEmpty) return;
                 ref.read(socketProvider).sendMessage(
                     {"data": _controller.text, "event": "message"});
                 _controller.clear();

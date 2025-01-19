@@ -27,12 +27,13 @@ class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
   int _messagesLength = 0;
 
   void _scrollToBottom() {
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     ref.watch(socketStreamProvider);
 
     return Expanded(
@@ -41,19 +42,6 @@ class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              spacing: 5,
-              children: [
-                Text(
-                  "Ask Uncle Psy and Aunt Bea",
-                  style: theme.textTheme.headlineSmall,
-                ),
-                Text(
-                  "the Composable Opossums",
-                  style: theme.textTheme.bodyLarge,
-                ),
-              ],
-            ),
             Expanded(
               child: Consumer(
                 builder: (_, ref, __) {

@@ -27,6 +27,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
     final isHomeHeaderVisible = !location.contains(Routes.deleteAccountRoute);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       drawer: Drawer(
         width: MediaQuery.sizeOf(context).width * 0.90,
         backgroundColor: const Color(0xFF191754),

@@ -50,7 +50,7 @@ class _ChatbotHeaderState extends State<ChatbotHeader> {
           controller: _controller,
           overlayChildBuilder: (_) => Positioned(
             width: screenDim.width * 0.40,
-            height: agents.length * 55,
+            height: agents.length * 56,
             child: CompositedTransformFollower(
               link: _layerLink,
               followerAnchor: Alignment.topCenter,
