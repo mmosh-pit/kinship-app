@@ -1,55 +1,52 @@
+import 'package:bigagent/models/product.dart';
+import 'package:bigagent/provider/app_purchases_provider.dart';
+import 'package:bigagent/provider/auth_provider.dart';
 import 'package:bigagent/widgets/subscriptions/molecules/subscription_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const subscriptions = [
-  {
-    "name": "Introductory",
-    "price": "Free",
-    "agents": "2",
-    "active": true,
-  },
-  {
-    "name": "Intensive",
-    "price": "\$7.99/mo",
-    "agents": "5",
-    "active": false,
-  },
-  {
-    "name": "Immersive",
-    "price": "\$29.99/mo",
-    "agents": "25",
-    "active": false,
-  },
-  {
-    "name": "Expansive",
-    "price": "\$49.99/mo",
-    "agents": "0",
-    "active": false,
-  },
-];
+final defaultSubscription = Product.fromJson({
+  "name": "Introductory",
+  "price": "Free",
+  "agents": "2",
+  "active": true,
+});
 
-class SubscriptionsList extends StatelessWidget {
+class SubscriptionsList extends ConsumerWidget {
   const SubscriptionsList({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: subscriptions.length,
-        itemBuilder: (_, index) {
-          final item = subscriptions[index] as dynamic;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(asyncAppPurchasesProvider);
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: SubscriptionItem(
-              name: item["name"],
-              price: item["price"],
-              agents: item["agents"],
-              active: item["active"],
+    final authProvider = ref.watch(asyncAuthProvider);
+
+    if (provider.value == null) return const Placeholder();
+
+    final subscriptions = provider.value!.products;
+
+    final activeSubscription =
+        authProvider.value!.user!.subscription!.productId;
+
+    return Expanded(
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          SubscriptionItem(
+            name: defaultSubscription.name,
+            price: defaultSubscription.price,
+            agents: defaultSubscription.agents,
+            active: activeSubscription.isEmpty,
+          ),
+          ...subscriptions.map(
+            (item) => SubscriptionItem(
+              name: item.name,
+              price: item.price,
+              agents: item.agents,
+              active: item.productId == activeSubscription,
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

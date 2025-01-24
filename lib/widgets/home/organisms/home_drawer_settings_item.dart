@@ -1,16 +1,19 @@
+import 'package:bigagent/provider/auth_provider.dart';
 import 'package:bigagent/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeDrawerSettingsItem extends StatefulWidget {
+class HomeDrawerSettingsItem extends ConsumerStatefulWidget {
   const HomeDrawerSettingsItem({super.key});
 
   @override
-  State<HomeDrawerSettingsItem> createState() => _HomeDrawerSettingsItemState();
+  ConsumerState<HomeDrawerSettingsItem> createState() =>
+      _HomeDrawerSettingsItemState();
 }
 
-class _HomeDrawerSettingsItemState extends State<HomeDrawerSettingsItem>
+class _HomeDrawerSettingsItemState extends ConsumerState<HomeDrawerSettingsItem>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _sizeAnimation;
@@ -129,7 +132,9 @@ class _HomeDrawerSettingsItemState extends State<HomeDrawerSettingsItem>
                     SizedBox(
                       height: 40,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          ref.read(asyncAuthProvider.notifier).logout();
+                        },
                         child: Text(
                           "Logout",
                           style: theme.textTheme.titleSmall!.copyWith(

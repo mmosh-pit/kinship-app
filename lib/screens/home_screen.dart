@@ -3,7 +3,6 @@ import 'package:bigagent/provider/chat_provider.dart';
 import 'package:bigagent/provider/socket_provider.dart';
 import 'package:bigagent/provider/solana_provider.dart';
 import 'package:bigagent/widgets/chatbot/molecules/chatbot_header.dart';
-import 'package:bigagent/widgets/chatbot/molecules/home_header.dart';
 import 'package:bigagent/widgets/chatbot/organisms/chatbot_messages_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

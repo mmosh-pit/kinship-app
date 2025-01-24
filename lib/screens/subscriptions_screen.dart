@@ -10,7 +10,7 @@ class SubscriptionsScreen extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.80,
+      height: MediaQuery.sizeOf(context).height * 0.75,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(

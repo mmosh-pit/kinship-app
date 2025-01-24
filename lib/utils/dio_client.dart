@@ -1,6 +1,7 @@
 import 'package:bigagent/services/storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:native_dio_adapter/native_dio_adapter.dart';
 
 class DioInterceptor extends InterceptorsWrapper {
   final _storageService = StorageService();
@@ -36,6 +37,13 @@ final class DioClient {
   DioClient._internal() {
     final time = 20;
     final timeout = Duration(seconds: time);
+
+    _dio.httpClientAdapter = NativeAdapter(
+        createCupertinoConfiguration: () =>
+            URLSessionConfiguration.ephemeralSessionConfiguration()
+              ..allowsCellularAccess = false
+              ..allowsConstrainedNetworkAccess = false
+              ..allowsExpensiveNetworkAccess = false);
 
     _dio.interceptors.add(DioInterceptor());
     _dio.options.baseUrl = dotenv.env["BACKEND_URL"]!;

@@ -1,3 +1,4 @@
+import 'package:bigagent/provider/app_purchases_provider.dart';
 import 'package:bigagent/router/app_router.dart';
 import 'package:bigagent/utils/custom_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(goRouterProvider);
+    ref.watch(asyncAppPurchasesProvider);
 
     return MaterialApp.router(
       builder: (context, child) {
