@@ -33,6 +33,7 @@ class SubscriptionsList extends ConsumerWidget {
         shrinkWrap: true,
         children: [
           SubscriptionItem(
+            productId: defaultSubscription.productId,
             name: defaultSubscription.name,
             price: defaultSubscription.price,
             agents: defaultSubscription.agents,
@@ -42,6 +43,7 @@ class SubscriptionsList extends ConsumerWidget {
             (item) => SubscriptionItem(
               name: item.name,
               price: item.price,
+              productId: item.productId,
               agents: item.agents,
               active: item.productId == activeSubscription,
             ),
