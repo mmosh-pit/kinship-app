@@ -21,6 +21,7 @@ class MyApp extends ConsumerWidget {
     ref.watch(asyncAppPurchasesProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       builder: (context, child) {
         final MediaQueryData data = MediaQuery.of(context);
         return MediaQuery(

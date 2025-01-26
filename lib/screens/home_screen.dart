@@ -15,10 +15,11 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  String _profileImage = "";
+  String _profileImage =
+      "https://storage.googleapis.com/mmosh-assets/avatar_placeholder.png";
   String _guestProfileImage = "";
 
-  String _participantName = "";
+  String _participantName = "You";
 
   void _fetchWalletData() async {
     final user = ref.read(asyncAuthProvider).value!.user;
