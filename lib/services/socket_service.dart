@@ -26,7 +26,8 @@ class SocketService {
 
         if (decodedData == "connected") return;
 
-        if (decodedData["event"] == "aiMessage") {
+        if (decodedData["event"] == "aiMessage" ||
+            decodedData["event"] == "userMessage") {
           final message = Message.fromJson(decodedData["data"]);
           _messagesController.add(message);
         } else {
@@ -40,7 +41,6 @@ class SocketService {
         initialize();
       },
       onError: (err) async {
-        print("Got error: $err");
         await Future.delayed(const Duration(seconds: 5));
         initialize();
       },

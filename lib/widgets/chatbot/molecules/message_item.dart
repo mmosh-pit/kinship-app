@@ -1,5 +1,5 @@
 import 'package:bigagent/models/message.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bigagent/widgets/common/atom/circle_avatar_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -27,22 +27,7 @@ class MessageItem extends StatelessWidget {
             isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isBot)
-            CachedNetworkImage(
-              imageUrl: participantImage,
-              imageBuilder: (context, imageProvider) => Container(
-                width: 40.0,
-                height: 40.0,
-                margin: const EdgeInsets.only(right: 5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
+          if (isBot) CircleAvatarImage(image: participantImage),
           Flexible(
             child: Column(
               crossAxisAlignment:
@@ -58,12 +43,12 @@ class MessageItem extends StatelessWidget {
                   MarkdownBody(
                     data: message.content,
                     styleSheet: MarkdownStyleSheet(
-                        textAlign:
-                            isBot ? WrapAlignment.start : WrapAlignment.end,
-                        textScaler: MediaQuery.textScalerOf(context).clamp(
-                          minScaleFactor: 1,
-                          maxScaleFactor: 1.25,
-                        )),
+                      textAlign:
+                          isBot ? WrapAlignment.start : WrapAlignment.end,
+                      textScaler: MediaQuery.textScalerOf(
+                        context,
+                      ).clamp(minScaleFactor: 1, maxScaleFactor: 1.25),
+                    ),
                   ),
                 if (message.isLoading)
                   const Padding(
@@ -73,22 +58,7 @@ class MessageItem extends StatelessWidget {
               ],
             ),
           ),
-          if (!isBot)
-            CachedNetworkImage(
-              imageUrl: participantImage,
-              imageBuilder: (context, imageProvider) => Container(
-                width: 40.0,
-                height: 40.0,
-                margin: const EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
+          if (!isBot) CircleAvatarImage(image: participantImage),
         ],
       ),
     );

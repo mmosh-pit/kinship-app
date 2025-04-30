@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bigagent/models/user_wallet_info.dart';
+import 'package:bigagent/provider/agents_provider.dart';
 import 'package:bigagent/services/helius_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod/riverpod.dart';
@@ -30,8 +31,6 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
     final allTokens = await _getAllTokenAddreses();
 
     final response = await HeliusService.fetchWalletData(wallet);
-
-    inspect(response);
 
     List<BagsCoin> communityCoins = [];
     List<BagsCoin> memecoins = [];
@@ -117,8 +116,6 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
       }
     }
 
-    inspect(profiles);
-
     state = AsyncValue.data(
       UserWalletInfo(
         profiles: profiles,
@@ -130,6 +127,8 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
         ),
       ),
     );
+
+    ref.read(asyncAgentProvider.notifier).setupAvailableAgents();
   }
 
   @override

@@ -7,6 +7,9 @@ class AgentItem extends StatefulWidget {
   final String description;
   final String symbol;
   final String owner;
+  final bool isActive;
+  final bool isLoading;
+  final VoidCallback toggleActivate;
 
   const AgentItem({
     super.key,
@@ -15,6 +18,9 @@ class AgentItem extends StatefulWidget {
     required this.description,
     required this.symbol,
     required this.owner,
+    required this.isActive,
+    required this.isLoading,
+    required this.toggleActivate,
   });
 
   @override
@@ -54,18 +60,19 @@ class _AgentItemState extends State<AgentItem> {
                   padding: const EdgeInsets.only(left: 4, bottom: 2, top: 2),
                   child: CachedNetworkImage(
                     imageUrl: widget.image,
-                    imageBuilder: (context, imageProvider) => Container(
-                      width: 60.0,
-                      height: 60.0,
-                      margin: const EdgeInsets.only(right: 5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+                    imageBuilder:
+                        (context, imageProvider) => Container(
+                          width: 60.0,
+                          height: 60.0,
+                          margin: const EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                   ),
                 ),
                 Expanded(
@@ -113,7 +120,7 @@ class _AgentItemState extends State<AgentItem> {
                               ),
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: widget.toggleActivate,
                               style: ButtonStyle(
                                 shape: WidgetStatePropertyAll(
                                   RoundedRectangleBorder(
@@ -121,7 +128,11 @@ class _AgentItemState extends State<AgentItem> {
                                     // side: BorderSide(co)
                                   ),
                                 ),
-                                // backgroundColor: WidgetStatePropertyAll(Color()),
+                                backgroundColor: WidgetStatePropertyAll(
+                                  widget.isActive
+                                      ? const Color(0xFF09073A)
+                                      : const Color(0xFFFF00AE),
+                                ),
                                 padding: const WidgetStatePropertyAll(
                                   EdgeInsets.symmetric(
                                     vertical: 4,
@@ -129,32 +140,34 @@ class _AgentItemState extends State<AgentItem> {
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                "Activate",
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                            )
+                              child:
+                                  widget.isLoading
+                                      ? const CircularProgressIndicator()
+                                      : Text(
+                                        widget.isActive
+                                            ? "Deactivate"
+                                            : "Activate",
+                                        style: theme.textTheme.bodyMedium,
+                                      ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             if (_isOpen)
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 5,
-                  horizontal: 2,
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
                 child: Text(
                   widget.description,
                   style: theme.textTheme.bodyMedium!.copyWith(
                     color: const Color(0xFFB5B5B5),
                   ),
                 ),
-              )
+              ),
           ],
         ),
       ),

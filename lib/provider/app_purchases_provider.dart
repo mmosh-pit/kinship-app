@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bigagent/models/product.dart';
 import 'package:bigagent/models/purchasable_product.dart';
 import 'package:bigagent/models/purchases.dart';
 import 'package:bigagent/models/store_state.dart';
+import 'package:bigagent/provider/auth_provider.dart';
 import 'package:bigagent/utils/dio_client.dart';
 import 'package:bigagent/utils/in_app_connection.dart';
 import 'package:flutter/foundation.dart';
@@ -16,24 +18,49 @@ class AppPurchasesProvider extends AsyncNotifier<Purchases> {
 
   bool _activePayment = false;
 
+  ProductDetails? _activeDetails;
+
+  final List<ProductDetails> _products = [];
+
   static final iapConnection = IAPConnection.instance;
 
   Future<Purchases> _getPurchases() async {
     try {
-      final response = await _client.get('/subscriptions');
+      final response = await _client
+          .get('/subscriptions?platform=${Platform.isIOS ? "ios" : "android"}');
       if (response.statusCode == 200) {
         var result = <Product>[];
         final payload = response.data['data'] as List;
 
-        result.addAll(payload.map((item) => Product.fromJson(item)));
+        for (var item in payload) {
+          final parsedProduct = Product.fromJson(item);
+          final product = await getProductById(parsedProduct.productId);
 
-        for (var item in result) {
-          final product = await getProductById(item.productId);
-
-          item = item.copyWith(price: product?.price);
+          if (Platform.isIOS) {
+            result.add(
+              parsedProduct.copyWith(
+                  price: product?.price, details: product!.productDetails),
+            );
+          } else {
+            result.add(
+              parsedProduct.copyWith(price: product?.price),
+            );
+          }
         }
 
         final purchaseUpdated = iapConnection.purchaseStream;
+
+        ref.read(asyncAuthProvider.notifier).updateCurrentProductAgent(result);
+
+        var index = 0;
+
+        if (Platform.isAndroid) {
+          for (final product in _products) {
+            result[index] =
+                result[index].copyWith(details: product, price: product.price);
+            index++;
+          }
+        }
 
         return Purchases(
           storeState: StoreState.available,
@@ -62,6 +89,7 @@ class AppPurchasesProvider extends AsyncNotifier<Purchases> {
     final response = await iapConnection.queryProductDetails(productIds);
 
     if (response.productDetails.isEmpty) return null;
+    _products.addAll(response.productDetails);
 
     return PurchasableProduct(response.productDetails.first);
   }
@@ -70,15 +98,19 @@ class AppPurchasesProvider extends AsyncNotifier<Purchases> {
     required String productId,
     required String userId,
     required bool isConsumable,
+    required ProductDetails details,
   }) async {
-    final response = await iapConnection.queryProductDetails({productId});
+    if (_activePayment) return;
+    state = const AsyncValue.loading();
 
-    if (response.productDetails.isEmpty) return;
     _activePayment = true;
     final purchaseParam = PurchaseParam(
-      productDetails: response.productDetails.first,
+      productDetails: details,
       applicationUserName: userId,
     );
+
+    _activeDetails = details;
+
     if (isConsumable) {
       await iapConnection.buyConsumable(purchaseParam: purchaseParam);
     } else {
@@ -101,6 +133,7 @@ class AppPurchasesProvider extends AsyncNotifier<Purchases> {
   Future<void> _handlePurchase(PurchaseDetails purchaseDetails) async {
     iapConnection.completePurchase(purchaseDetails);
     if (purchaseDetails.status == PurchaseStatus.canceled) {
+      state = AsyncValue.data(state.value!);
       return;
     }
 
@@ -108,11 +141,31 @@ class AppPurchasesProvider extends AsyncNotifier<Purchases> {
       if (_activePayment) {
         _activePayment = false;
       }
+
+      try {
+        if (Platform.isIOS) {
+          final product = state.value!.products
+              .firstWhere((e) => e.productId == purchaseDetails.productID);
+
+          ref.read(asyncAuthProvider.notifier).setUserSubscription(
+                product,
+              );
+        } else {
+          final product = state.value!.products
+              .firstWhere((e) => e.price == _activeDetails?.price);
+
+          ref.read(asyncAuthProvider.notifier).setUserSubscription(
+                product,
+              );
+        }
+      } catch (_) {
+        ref.read(asyncAuthProvider.notifier).setUserSubscription(
+              null,
+            );
+      }
     }
 
-    if (purchaseDetails.status == PurchaseStatus.canceled) {
-      await iapConnection.completePurchase(purchaseDetails);
-    }
+    state = AsyncValue.data(state.value!);
   }
 
   void _updateStreamOnDone() {

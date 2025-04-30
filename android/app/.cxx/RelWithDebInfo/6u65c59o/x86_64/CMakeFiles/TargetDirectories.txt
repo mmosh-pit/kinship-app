@@ -1,0 +1,2 @@
+/Users/eliasramirez/Documents/projects/upwork/hellbenders/ai_app/android/app/.cxx/RelWithDebInfo/6u65c59o/x86_64/CMakeFiles/edit_cache.dir
+/Users/eliasramirez/Documents/projects/upwork/hellbenders/ai_app/android/app/.cxx/RelWithDebInfo/6u65c59o/x86_64/CMakeFiles/rebuild_cache.dir

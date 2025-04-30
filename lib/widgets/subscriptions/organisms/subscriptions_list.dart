@@ -21,31 +21,40 @@ class SubscriptionsList extends ConsumerWidget {
 
     final authProvider = ref.watch(asyncAuthProvider);
 
-    if (provider.value == null) return const Placeholder();
+    if (provider.value == null) return const SizedBox.shrink();
 
     final subscriptions = provider.value!.products;
 
-    final activeSubscription =
-        authProvider.value!.user!.subscription!.productId;
+    final activeSubscription = authProvider.value!.user!.subscription!;
 
     return Expanded(
       child: ListView(
         shrinkWrap: true,
         children: [
-          SubscriptionItem(
-            productId: defaultSubscription.productId,
-            name: defaultSubscription.name,
-            price: defaultSubscription.price,
-            agents: defaultSubscription.agents,
-            active: activeSubscription.isEmpty,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: SubscriptionItem(
+              productId: defaultSubscription.productId,
+              name: defaultSubscription.name,
+              price: defaultSubscription.price,
+              agents: defaultSubscription.agents,
+              active: activeSubscription.productId.isEmpty,
+              upgrade: false,
+              details: null,
+            ),
           ),
           ...subscriptions.map(
-            (item) => SubscriptionItem(
-              name: item.name,
-              price: item.price,
-              productId: item.productId,
-              agents: item.agents,
-              active: item.productId == activeSubscription,
+            (item) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SubscriptionItem(
+                name: item.name,
+                price: item.price,
+                productId: item.productId,
+                agents: item.agents,
+                active: item.productId == activeSubscription.productId,
+                upgrade: item.tier >= activeSubscription.tier,
+                details: item.details,
+              ),
             ),
           ),
         ],

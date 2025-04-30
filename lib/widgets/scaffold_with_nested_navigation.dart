@@ -1,4 +1,5 @@
 import 'package:bigagent/utils/routes.dart';
+import 'package:bigagent/widgets/chatbot/molecules/chatbot_header.dart';
 import 'package:bigagent/widgets/chatbot/molecules/home_header.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -11,10 +12,7 @@ import 'package:go_router/go_router.dart';
 class ScaffoldWithNestedNavigation extends StatelessWidget {
   final StatefulNavigationShell shell;
 
-  const ScaffoldWithNestedNavigation({
-    super.key,
-    required this.shell,
-  });
+  const ScaffoldWithNestedNavigation({super.key, required this.shell});
 
   void _closeDrawer(BuildContext context) {
     Scaffold.of(context).closeDrawer();
@@ -25,6 +23,8 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
     final location = GoRouterState.of(context).fullPath ?? "";
 
     final isHomeHeaderVisible = !location.contains(Routes.deleteAccountRoute);
+
+    final isChatRoute = location.contains(Routes.chatRoute);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -64,17 +64,17 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
                           iconPath: "assets/icons/agents.svg",
                           title: "Agents",
                         ),
-                        HomeDrawerItem(
-                          action: () {
-                            shell.goBranch(2);
-                            _closeDrawer(context);
-                          },
-                          iconPath: "assets/icons/subscriptions.svg",
-                          title: "Subscriptions",
-                        ),
+                        // HomeDrawerItem(
+                        //   action: () {
+                        //     shell.goBranch(2);
+                        //     _closeDrawer(context);
+                        //   },
+                        //   iconPath: "assets/icons/subscriptions.svg",
+                        //   title: "Subscriptions",
+                        // ),
                         const HomeDrawerSettingsItem(),
                       ],
-                    )
+                    ),
                   ],
                 );
               },
@@ -85,8 +85,11 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Visibility(visible: isHomeHeaderVisible, child: const HomeHeader()),
-            shell,
+            Visibility(
+              visible: isHomeHeaderVisible,
+              child: !isChatRoute ? const HomeHeader() : const ChatbotHeader(),
+            ),
+            Expanded(child: shell),
           ],
         ),
       ),

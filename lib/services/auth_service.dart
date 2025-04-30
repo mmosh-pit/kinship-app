@@ -24,7 +24,6 @@ class AuthService {
 
       return response.data["data"];
     } catch (err) {
-      print("Got error: $err");
       if (err is DioException) {
         throw Error.safeToString(err.response!.data["errors"][0]);
       }

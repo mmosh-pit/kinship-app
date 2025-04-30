@@ -31,14 +31,11 @@ class CustomSearchField extends StatelessWidget {
             onTap: executeSearch,
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFF5A00FF),
+                // color: const Color(0xFF5A00FF),
                 borderRadius: BorderRadius.circular(24),
               ),
               padding: const EdgeInsets.all(10),
-              child: const Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.search, color: Colors.white),
             ),
           ),
           SizedBox(

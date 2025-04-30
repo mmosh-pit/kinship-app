@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:bigagent/provider/app_purchases_provider.dart';
 import 'package:bigagent/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubscriptionItem extends StatelessWidget {
   final String name;
@@ -9,6 +13,8 @@ class SubscriptionItem extends StatelessWidget {
   final String agents;
   final String productId;
   final bool active;
+  final bool upgrade;
+  final ProductDetails? details;
 
   const SubscriptionItem({
     super.key,
@@ -17,6 +23,8 @@ class SubscriptionItem extends StatelessWidget {
     required this.agents,
     required this.productId,
     required this.active,
+    required this.upgrade,
+    required this.details,
   });
 
   @override
@@ -47,7 +55,7 @@ class SubscriptionItem extends StatelessWidget {
                   children: [
                     Text(name, style: theme.textTheme.titleMedium),
                     Text(
-                      agents == "0" ? "unlimited" : "$agents agents",
+                      agents == "0" ? "Unlimited" : "$agents agents",
                       style: theme.textTheme.bodyMedium!.copyWith(
                         color: const Color(0xFFB5B5B5),
                       ),
@@ -78,15 +86,34 @@ class SubscriptionItem extends StatelessWidget {
           ),
           Consumer(
             builder: (context, ref, child) {
+              final isLoadingButton =
+                  ref.watch(asyncAppPurchasesProvider).isLoading;
+
               return ElevatedButton(
                 style: ButtonStyle(
                   shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      // side: BorderSide(co)
+                      side: BorderSide(
+                        color: Color(
+                          active
+                              ? 0xFF3C00FF
+                              : upgrade
+                                  ? 0xFFFF00AE
+                                  : 0xFFCC038C,
+                        ),
+                      ),
                     ),
                   ),
-                  // backgroundColor: WidgetStatePropertyAll(Color()),
+                  backgroundColor: WidgetStatePropertyAll(
+                    Color(
+                      active
+                          ? 0xFF3C00FF
+                          : upgrade
+                              ? 0xFFFF00AE
+                              : 0xFFFF00AE,
+                    ).withValues(alpha: !upgrade && !active ? 0.22 : 1),
+                  ),
                   padding: const WidgetStatePropertyAll(
                     EdgeInsets.symmetric(
                       horizontal: 12,
@@ -100,18 +127,48 @@ class SubscriptionItem extends StatelessWidget {
                 onPressed: () {
                   if (active) return;
 
-                  final id = ref.read(asyncAuthProvider).value!.user!.id;
+                  final provider = ref.read(asyncAuthProvider);
+
+                  final subscription = provider.value!.user!.subscription;
+
+                  if (productId.isEmpty && subscription != null) {
+                    if (Platform.isIOS) {
+                      launchUrl(
+                        Uri.parse(
+                            "https://apps.apple.com/account/subscriptions"),
+                      );
+                      return;
+                    }
+
+                    launchUrl(
+                      Uri.parse(
+                          'https://play.google.com/store/account/subscriptions?sku=${subscription.productId}&package=com.kinship.bigagent'),
+                    );
+
+                    return;
+                  }
+
+                  if (details == null) return;
+
+                  final id = provider.value!.user!.uuid;
 
                   ref.read(asyncAppPurchasesProvider.notifier).buy(
                         productId: productId,
                         userId: id,
                         isConsumable: false,
+                        details: details!,
                       );
                 },
-                child: Text(
-                  active ? "Current" : "Upgrade",
-                  style: theme.textTheme.bodyMedium,
-                ),
+                child: isLoadingButton
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        active
+                            ? "Current"
+                            : upgrade
+                                ? "Upgrade"
+                                : "Downgrade",
+                        style: theme.textTheme.bodyMedium,
+                      ),
               );
             },
           ),

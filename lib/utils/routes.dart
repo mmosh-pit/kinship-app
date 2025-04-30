@@ -7,6 +7,7 @@ class Routes {
   static const agents = "agents";
   static const subscriptions = "subscriptions";
   static const deleteAccount = "delete_account";
+  static const chat = "chat";
 
   static const homeRoute = "/$home";
   static const deleteAccountRoute = "$homeRoute/$deleteAccount";
@@ -17,4 +18,6 @@ class Routes {
   static const loginRoute = "$mainRoute/$login";
   static const signupRoute = "$mainRoute/$signup";
   static const codeRoute = "$signupRoute/$code";
+
+  static const chatRoute = "$homeRoute/$chat";
 }

@@ -1,13 +1,14 @@
 import 'package:bigagent/models/product.dart';
 
 class User {
-  String id;
+  final String id;
   String name;
   String email;
   String address;
   String referredBy;
   int telegramId;
   String privateKey;
+  final String uuid;
   BlueskyData? bsky;
   final Product? subscription;
 
@@ -19,13 +20,14 @@ class User {
     required this.referredBy,
     required this.telegramId,
     required this.privateKey,
+    required this.uuid,
     this.subscription,
     this.bsky,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json["id"] ?? "",
+      id: json["ID"] ?? "",
       name: json['name'],
       email: json['email'],
       address: json['address'],
@@ -33,9 +35,10 @@ class User {
       telegramId: json['telegramId'],
       privateKey: json['privateKey'],
       subscription: json["subscription"] != null
-          ? Product.fromJson(json["subscription"])
+          ? Product.fromUserJson(json["subscription"])
           : null,
       bsky: json['bsky'] != null ? BlueskyData.fromJson(json['bsky']) : null,
+      uuid: json["uuid"],
     );
   }
 
@@ -54,6 +57,21 @@ class User {
     data["subscription"] = subscription;
     return data;
   }
+
+  User copyWith({
+    Product? subscription,
+  }) =>
+      User(
+        id: id,
+        name: name,
+        email: email,
+        address: address,
+        referredBy: referredBy,
+        telegramId: telegramId,
+        privateKey: privateKey,
+        uuid: uuid,
+        subscription: subscription,
+      );
 }
 
 class BlueskyData {

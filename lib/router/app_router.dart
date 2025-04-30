@@ -1,12 +1,13 @@
 import 'package:bigagent/provider/auth_provider.dart';
 import 'package:bigagent/screens/agents_screen.dart';
+import 'package:bigagent/screens/chat_screen.dart';
 import 'package:bigagent/screens/delete_account_screen.dart';
 import 'package:bigagent/screens/enter_code_screen.dart';
 import 'package:bigagent/screens/home_screen.dart';
 import 'package:bigagent/screens/login_screen.dart';
 import 'package:bigagent/screens/select_login_screen.dart';
 import 'package:bigagent/screens/sign_up_screen.dart';
-import 'package:bigagent/screens/subscriptions_screen.dart';
+// import 'package:bigagent/screens/subscriptions_screen.dart';
 import 'package:bigagent/utils/routes.dart';
 import 'package:bigagent/widgets/scaffold_with_nested_navigation.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,9 @@ GoRouter router(Ref ref) {
 
   final homeKey = GlobalKey<NavigatorState>(debugLabel: 'homeKey');
   final agentsKey = GlobalKey<NavigatorState>(debugLabel: 'agentsKey');
-  final subscriptionsKey =
-      GlobalKey<NavigatorState>(debugLabel: "subscriptionsKey");
+  // final subscriptionsKey = GlobalKey<NavigatorState>(
+  //   debugLabel: "subscriptionsKey",
+  // );
 
   final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
   ref
@@ -46,8 +48,9 @@ GoRouter router(Ref ref) {
     // update the listenable, when some provider value changes
     // here, we are just interested in wheter the user's logged in
     ..listen(
-      asyncAuthProvider
-          .select((value) => value.whenData((value) => value.isAuth)),
+      asyncAuthProvider.select(
+        (value) => value.whenData((value) => value.isAuth),
+      ),
       (_, next) {
         isAuth.value = next;
       },
@@ -60,9 +63,9 @@ GoRouter router(Ref ref) {
     debugLogDiagnostics: true,
     routes: [
       StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => ScaffoldWithNestedNavigation(
-          shell: shell,
-        ),
+        builder:
+            (context, state, shell) =>
+                ScaffoldWithNestedNavigation(shell: shell),
         branches: [
           StatefulShellBranch(
             navigatorKey: homeKey,
@@ -75,6 +78,10 @@ GoRouter router(Ref ref) {
                     path: Routes.deleteAccount,
                     builder: (_, __) => const DeleteAccountScreen(),
                   ),
+                  GoRoute(
+                    path: Routes.chat,
+                    builder: (_, __) => const ChatScreen(),
+                  ),
                 ],
               ),
             ],
@@ -85,28 +92,25 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: Routes.agentsRoute,
                 builder: (_, __) => const AgentsScreen(),
-              )
+              ),
             ],
           ),
-          StatefulShellBranch(
-            navigatorKey: subscriptionsKey,
-            routes: [
-              GoRoute(
-                path: Routes.subscriptionsRoute,
-                builder: (_, __) => const SubscriptionsScreen(),
-              )
-            ],
-          ),
+          // StatefulShellBranch(
+          //   navigatorKey: subscriptionsKey,
+          //   routes: [
+          //     GoRoute(
+          //       path: Routes.subscriptionsRoute,
+          //       builder: (_, __) => const SubscriptionsScreen(),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
       GoRoute(
         path: Routes.mainRoute,
         builder: (_, __) => const SelectLoginScreen(),
         routes: [
-          GoRoute(
-            path: Routes.login,
-            builder: (_, __) => const LoginScreen(),
-          ),
+          GoRoute(path: Routes.login, builder: (_, __) => const LoginScreen()),
           GoRoute(
             path: Routes.signup,
             builder: (_, __) => const SignUpScreen(),
@@ -114,7 +118,7 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: Routes.code,
                 builder: (_, __) => const EnterCodeScreen(),
-              )
+              ),
             ],
           ),
         ],
@@ -133,8 +137,9 @@ GoRouter router(Ref ref) {
         return auth ? Routes.homeRoute : Routes.mainRoute;
       }
 
-      final isLoggingIn = (state.uri.path == Routes.mainRoute ||
-          state.uri.path == Routes.loginRoute);
+      final isLoggingIn =
+          (state.uri.path == Routes.mainRoute ||
+              state.uri.path == Routes.loginRoute);
       if (isLoggingIn) return auth ? Routes.homeRoute : null;
 
       return auth ? null : state.uri.path;

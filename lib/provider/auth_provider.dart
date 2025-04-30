@@ -1,4 +1,5 @@
 import 'package:bigagent/models/auth_data.dart';
+import 'package:bigagent/models/product.dart';
 import 'package:bigagent/models/user.dart';
 import 'package:bigagent/router/app_router.dart';
 import 'package:bigagent/services/auth_service.dart';
@@ -88,6 +89,36 @@ class AuthProvider extends AsyncNotifier<AuthData> {
     appRouter?.replace(Routes.loginRoute);
 
     state = AsyncValue.data(AuthData(isAuth: false, user: null));
+  }
+
+  void setUserSubscription(Product? product) {
+    if (state.value == null || state.value?.user == null) return;
+    state = AsyncValue.data(
+      AuthData(
+        isAuth: true,
+        user: state.value!.user!.copyWith(subscription: product),
+      ),
+    );
+  }
+
+  void updateCurrentProductAgent(List<Product> products) {
+    if (state.value == null || state.value?.user == null) return;
+
+    var product = state.value!.user!.subscription;
+
+    if (product == null) return;
+    if (product.productId.isEmpty) return;
+
+    final res = products.firstWhere((e) => e.productId == product!.productId);
+
+    product = product.copyWith(agents: res.agents);
+
+    state = AsyncValue.data(
+      AuthData(
+        isAuth: true,
+        user: state.value!.user!.copyWith(subscription: product),
+      ),
+    );
   }
 }
 

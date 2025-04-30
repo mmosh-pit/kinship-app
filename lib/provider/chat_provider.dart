@@ -1,22 +1,11 @@
 import 'package:bigagent/models/chat.dart';
 import 'package:bigagent/models/message.dart';
-import 'package:bigagent/services/chat_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChatProvider extends AsyncNotifier<Chat> {
-  Future<Chat> _getChat() async {
-    try {
-      final response = await ChatService.getChat();
-
-      return response;
-    } catch (err) {
-      return Chat.empty();
-    }
-  }
-
   @override
   Future<Chat> build() async {
-    return _getChat();
+    return Chat.empty();
   }
 
   void addMessage(Message message) {
@@ -42,6 +31,18 @@ class ChatProvider extends AsyncNotifier<Chat> {
       return;
     }
     state = AsyncValue.data(state.value!.addMessage(message));
+  }
+
+  Future<void> setChat(Chat chat) async {
+    await update((_) {
+      return chat;
+    });
+  }
+
+  Future<void> clearChat() async {
+    await update((_) {
+      return Chat.empty();
+    });
   }
 }
 

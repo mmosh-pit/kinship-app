@@ -4,13 +4,11 @@ import 'package:bigagent/utils/dio_client.dart';
 class ChatService {
   static final _client = DioClient();
 
-  static Future<Chat> getChat() async {
-    final response = await _client.get("/get-or-create-chat");
+  static Future<List<Chat>> getChats() async {
+    final response = await _client.get("/chats/active");
 
-    final data = response.data["data"];
+    final data = response.data["data"] as List<dynamic>;
 
-    final result = Chat.fromJson(data);
-
-    return result;
+    return data.map((e) => Chat.fromJson(e)).toList();
   }
 }
