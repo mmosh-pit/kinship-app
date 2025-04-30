@@ -4,7 +4,6 @@ import 'package:bigagent/provider/app_purchases_provider.dart';
 import 'package:bigagent/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SubscriptionItem extends StatelessWidget {
@@ -14,7 +13,7 @@ class SubscriptionItem extends StatelessWidget {
   final String productId;
   final bool active;
   final bool upgrade;
-  final ProductDetails? details;
+  // final ProductDetails? details;
 
   const SubscriptionItem({
     super.key,
@@ -24,7 +23,7 @@ class SubscriptionItem extends StatelessWidget {
     required this.productId,
     required this.active,
     required this.upgrade,
-    required this.details,
+    // required this.details,
   });
 
   @override
@@ -99,8 +98,8 @@ class SubscriptionItem extends StatelessWidget {
                           active
                               ? 0xFF3C00FF
                               : upgrade
-                                  ? 0xFFFF00AE
-                                  : 0xFFCC038C,
+                              ? 0xFFFF00AE
+                              : 0xFFCC038C,
                         ),
                       ),
                     ),
@@ -110,15 +109,12 @@ class SubscriptionItem extends StatelessWidget {
                       active
                           ? 0xFF3C00FF
                           : upgrade
-                              ? 0xFFFF00AE
-                              : 0xFFFF00AE,
+                          ? 0xFFFF00AE
+                          : 0xFFFF00AE,
                     ).withValues(alpha: !upgrade && !active ? 0.22 : 1),
                   ),
                   padding: const WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 0,
-                    ),
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                   ),
                   fixedSize: WidgetStatePropertyAll(
                     Size.fromHeight(screenDim.height * 0.03),
@@ -135,40 +131,45 @@ class SubscriptionItem extends StatelessWidget {
                     if (Platform.isIOS) {
                       launchUrl(
                         Uri.parse(
-                            "https://apps.apple.com/account/subscriptions"),
+                          "https://apps.apple.com/account/subscriptions",
+                        ),
                       );
                       return;
                     }
 
                     launchUrl(
                       Uri.parse(
-                          'https://play.google.com/store/account/subscriptions?sku=${subscription.productId}&package=com.kinship.bigagent'),
+                        'https://play.google.com/store/account/subscriptions?sku=${subscription.productId}&package=com.kinship.bigagent',
+                      ),
                     );
 
                     return;
                   }
 
-                  if (details == null) return;
+                  // if (details == null) return;
 
                   final id = provider.value!.user!.uuid;
 
-                  ref.read(asyncAppPurchasesProvider.notifier).buy(
+                  ref
+                      .read(asyncAppPurchasesProvider.notifier)
+                      .buy(
                         productId: productId,
                         userId: id,
                         isConsumable: false,
-                        details: details!,
+                        // details: details!,
                       );
                 },
-                child: isLoadingButton
-                    ? const CircularProgressIndicator()
-                    : Text(
-                        active
-                            ? "Current"
-                            : upgrade
-                                ? "Upgrade"
-                                : "Downgrade",
-                        style: theme.textTheme.bodyMedium,
-                      ),
+                child:
+                    isLoadingButton
+                        ? const CircularProgressIndicator()
+                        : Text(
+                          active
+                              ? "Current"
+                              : upgrade
+                              ? "Upgrade"
+                              : "Downgrade",
+                          style: theme.textTheme.bodyMedium,
+                        ),
               );
             },
           ),

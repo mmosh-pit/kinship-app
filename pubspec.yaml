@@ -2,7 +2,7 @@ name: bigagent
 description: "A new Flutter project."
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.1+13
+version: 0.0.1+14
 
 environment:
   sdk: 3.7.2
@@ -24,7 +24,7 @@ dependencies:
   cached_network_image: 3.4.1
   web_socket_channel: 2.4.0
   flutter_markdown: 0.7.5
-  in_app_purchase: 3.2.1
+  # in_app_purchase: 3.2.1
   url_launcher: 6.3.1
   intl: 0.20.2
 

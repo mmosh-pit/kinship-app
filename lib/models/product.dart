@@ -1,12 +1,10 @@
-import 'package:in_app_purchase/in_app_purchase.dart';
-
 final class Product {
   final String productId;
   final String name;
   final int tier;
   final String price;
   final String agents;
-  final ProductDetails? details;
+  // final ProductDetails? details;
 
   const Product({
     required this.productId,
@@ -14,17 +12,17 @@ final class Product {
     required this.tier,
     required this.price,
     required this.agents,
-    this.details,
+    // this.details,
   });
 
   Product.fromJson(Map<String, dynamic> json)
-      : this(
-          productId: json['product_id'] ?? '',
-          name: json['name'] ?? "",
-          tier: json['tier'] ?? 0,
-          price: json["price"] ?? "",
-          agents: json["agents"] ?? "",
-        );
+    : this(
+        productId: json['product_id'] ?? '',
+        name: json['name'] ?? "",
+        tier: json['tier'] ?? 0,
+        price: json["price"] ?? "",
+        agents: json["agents"] ?? "",
+      );
 
   factory Product.fromUserJson(Map<String, dynamic> json) {
     return Product(
@@ -39,16 +37,15 @@ final class Product {
   Product copyWith({
     String? price,
     String? agents,
-    ProductDetails? details,
-  }) =>
-      Product(
-        productId: productId,
-        name: name,
-        tier: tier,
-        price: price ?? this.price,
-        agents: agents ?? this.agents,
-        details: details ?? this.details,
-      );
+    // ProductDetails? details,
+  }) => Product(
+    productId: productId,
+    name: name,
+    tier: tier,
+    price: price ?? this.price,
+    agents: agents ?? this.agents,
+    // details: details ?? this.details,
+  );
 
   Map<String, dynamic> toJson() {
     return {
