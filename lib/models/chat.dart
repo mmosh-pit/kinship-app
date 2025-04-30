@@ -20,6 +20,13 @@ class Chat {
   });
 
   factory Chat.fromJson(Map<String, dynamic> json) {
+    final lastMessage =
+        json["lastMessage"] != null
+            ? json["lastMessage"]["id"] != null
+                ? Message.fromJson(json["lastMessage"])
+                : null
+            : null;
+
     return Chat(
       id: json["id"],
       participants:
@@ -37,7 +44,7 @@ class Chat {
       deactivated: json["deactivated"] ?? false,
       agent:
           json["chatAgent"] != null ? Agent.fromJson(json["chatAgent"]) : null,
-      lastMessage: json["lastMessage"],
+      lastMessage: lastMessage,
     );
   }
 

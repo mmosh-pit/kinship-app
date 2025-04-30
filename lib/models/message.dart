@@ -26,8 +26,8 @@ class Message {
     sender: json["sender"],
     createdAt: json["created_at"],
     isLoading: json["is_loading"] ?? false,
-    chatId: json["chat_id"],
-    agentId: json["agent_id"],
+    chatId: json["chat_id"] ?? "",
+    agentId: json["agent_id"] ?? "",
   );
 
   Message copyWith({String? content, bool? isLoading}) => Message(

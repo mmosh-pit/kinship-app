@@ -37,6 +37,7 @@ class ChatItem extends ConsumerWidget {
             imageBuilder: (_, image) => CircleAvatar(backgroundImage: image),
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,9 +54,14 @@ class ChatItem extends ConsumerWidget {
                 ],
               ),
               if (chat.lastMessage != null)
-                Text(
-                  chat.lastMessage!.content,
-                  style: theme.textTheme.bodyMedium,
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width * 0.50,
+                  child: Text(
+                    chat.lastMessage!.content,
+                    style: theme.textTheme.bodyMedium,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
             ],
           ),

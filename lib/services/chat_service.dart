@@ -5,10 +5,15 @@ class ChatService {
   static final _client = DioClient();
 
   static Future<List<Chat>> getChats() async {
-    final response = await _client.get("/chats/active");
+    try {
+      final response = await _client.get("/chats/active");
 
-    final data = response.data["data"] as List<dynamic>;
+      final data = response.data["data"] as List<dynamic>;
 
-    return data.map((e) => Chat.fromJson(e)).toList();
+      return data.map((e) => Chat.fromJson(e)).toList();
+    } catch (err) {
+      print("Got error: $err");
+      return [];
+    }
   }
 }

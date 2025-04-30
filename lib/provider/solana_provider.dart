@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bigagent/models/user_wallet_info.dart';
 import 'package:bigagent/provider/agents_provider.dart';
@@ -38,6 +37,10 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
     List<BagsNFT> badges = [];
     List<BagsNFT> profiles = [];
     List<BagsNFT> passes = [];
+
+    if (response == null) return;
+
+    if (response["result"] == null) return;
 
     for (final value in response["result"]["items"]) {
       if (value["interface"] == "FungibleToken") {
@@ -103,13 +106,14 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
 
       if (collectionDefinition["collection_metadata"]["symbol"] ==
           passCollection) {
-        nft["parentKey"] = value["content"]["metadata"]["attributes"]
-            ?.find(
-              (attr) =>
-                  attr["trait_type"] == "Community" ||
-                  attr["trait_type"] == "Project",
-            )
-            ?.value;
+        nft["parentKey"] =
+            value["content"]["metadata"]["attributes"]
+                ?.find(
+                  (attr) =>
+                      attr["trait_type"] == "Community" ||
+                      attr["trait_type"] == "Project",
+                )
+                ?.value;
 
         passes.add(BagsNFT.fromJson(nft));
         continue;
@@ -121,10 +125,7 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
         profiles: profiles,
         passes: passes,
         badges: badges,
-        coins: BagsCoins(
-          community: communityCoins,
-          memecoins: memecoins,
-        ),
+        coins: BagsCoins(community: communityCoins, memecoins: memecoins),
       ),
     );
 
@@ -139,5 +140,5 @@ class SolanaProvider extends AsyncNotifier<UserWalletInfo?> {
 
 final asyncSolanaProvider =
     AsyncNotifierProvider<SolanaProvider, UserWalletInfo?>(
-  () => SolanaProvider(),
-);
+      () => SolanaProvider(),
+    );
