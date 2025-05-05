@@ -1,7 +1,7 @@
-import 'package:bigagent/provider/auth_provider.dart';
-import 'package:bigagent/provider/socket_provider.dart';
-import 'package:bigagent/provider/solana_provider.dart';
-import 'package:bigagent/widgets/chats/templates/chats_list_wrapper.dart';
+import 'package:kinship_bots/provider/auth_provider.dart';
+import 'package:kinship_bots/provider/socket_provider.dart';
+import 'package:kinship_bots/provider/solana_provider.dart';
+import 'package:kinship_bots/widgets/chats/templates/chats_list_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

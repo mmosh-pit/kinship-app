@@ -1,8 +1,8 @@
-import 'package:bigagent/provider/chat_provider.dart';
-import 'package:bigagent/provider/socket_provider.dart';
-import 'package:bigagent/provider/solana_provider.dart';
-import 'package:bigagent/widgets/chatbot/molecules/chat_text_field.dart';
-import 'package:bigagent/widgets/chatbot/molecules/message_item.dart';
+import 'package:kinship_bots/provider/chat_provider.dart';
+import 'package:kinship_bots/provider/socket_provider.dart';
+import 'package:kinship_bots/provider/solana_provider.dart';
+import 'package:kinship_bots/widgets/chatbot/molecules/chat_text_field.dart';
+import 'package:kinship_bots/widgets/chatbot/molecules/message_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

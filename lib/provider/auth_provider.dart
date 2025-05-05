@@ -1,10 +1,10 @@
-import 'package:bigagent/models/auth_data.dart';
-import 'package:bigagent/models/product.dart';
-import 'package:bigagent/models/user.dart';
-import 'package:bigagent/router/app_router.dart';
-import 'package:bigagent/services/auth_service.dart';
-import 'package:bigagent/services/storage_service.dart';
-import 'package:bigagent/utils/routes.dart';
+import 'package:kinship_bots/models/auth_data.dart';
+import 'package:kinship_bots/models/product.dart';
+import 'package:kinship_bots/models/user.dart';
+import 'package:kinship_bots/router/app_router.dart';
+import 'package:kinship_bots/services/auth_service.dart';
+import 'package:kinship_bots/services/storage_service.dart';
+import 'package:kinship_bots/utils/routes.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class AuthProvider extends AsyncNotifier<AuthData> {

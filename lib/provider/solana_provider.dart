@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bigagent/models/user_wallet_info.dart';
-import 'package:bigagent/provider/agents_provider.dart';
-import 'package:bigagent/services/helius_service.dart';
+import 'package:kinship_bots/models/user_wallet_info.dart';
+import 'package:kinship_bots/provider/agents_provider.dart';
+import 'package:kinship_bots/services/helius_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod/riverpod.dart';
 

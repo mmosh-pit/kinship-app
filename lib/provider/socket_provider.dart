@@ -1,5 +1,5 @@
-import 'package:bigagent/provider/chat_provider.dart';
-import 'package:bigagent/services/socket_service.dart';
+import 'package:kinship_bots/provider/chat_provider.dart';
+import 'package:kinship_bots/services/socket_service.dart';
 import 'package:riverpod/riverpod.dart';
 
 final socketProvider = Provider<SocketService>((ref) {

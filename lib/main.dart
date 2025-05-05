@@ -1,6 +1,6 @@
-import 'package:bigagent/provider/app_purchases_provider.dart';
-import 'package:bigagent/router/app_router.dart';
-import 'package:bigagent/utils/custom_theme.dart';
+import 'package:kinship_bots/provider/app_purchases_provider.dart';
+import 'package:kinship_bots/router/app_router.dart';
+import 'package:kinship_bots/utils/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

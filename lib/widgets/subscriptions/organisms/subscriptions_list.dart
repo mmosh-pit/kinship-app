@@ -1,7 +1,7 @@
-import 'package:bigagent/models/product.dart';
-import 'package:bigagent/provider/app_purchases_provider.dart';
-import 'package:bigagent/provider/auth_provider.dart';
-import 'package:bigagent/widgets/subscriptions/molecules/subscription_item.dart';
+import 'package:kinship_bots/models/product.dart';
+import 'package:kinship_bots/provider/app_purchases_provider.dart';
+import 'package:kinship_bots/provider/auth_provider.dart';
+import 'package:kinship_bots/widgets/subscriptions/molecules/subscription_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

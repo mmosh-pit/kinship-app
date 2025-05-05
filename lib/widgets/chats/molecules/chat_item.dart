@@ -1,6 +1,6 @@
-import 'package:bigagent/models/chat.dart';
-import 'package:bigagent/provider/chat_provider.dart';
-import 'package:bigagent/utils/routes.dart';
+import 'package:kinship_bots/models/chat.dart';
+import 'package:kinship_bots/provider/chat_provider.dart';
+import 'package:kinship_bots/utils/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:bigagent/models/purchases.dart';
+import 'package:kinship_bots/models/purchases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppPurchasesProvider extends AsyncNotifier<Purchases?> {

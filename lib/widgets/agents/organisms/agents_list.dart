@@ -1,5 +1,5 @@
-import 'package:bigagent/provider/agents_provider.dart';
-import 'package:bigagent/widgets/agents/molecules/agent_item.dart';
+import 'package:kinship_bots/provider/agents_provider.dart';
+import 'package:kinship_bots/widgets/agents/molecules/agent_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

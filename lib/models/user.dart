@@ -1,4 +1,4 @@
-import 'package:bigagent/models/product.dart';
+import 'package:kinship_bots/models/product.dart';
 
 class User {
   final String id;

@@ -1,6 +1,6 @@
-import 'package:bigagent/provider/chat_provider.dart';
-import 'package:bigagent/widgets/chats/molecules/chat_expandable_search.dart';
-import 'package:bigagent/widgets/common/atom/circle_avatar_image.dart';
+import 'package:kinship_bots/provider/chat_provider.dart';
+import 'package:kinship_bots/widgets/chats/molecules/chat_expandable_search.dart';
+import 'package:kinship_bots/widgets/common/atom/circle_avatar_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,5 +1,5 @@
-import 'package:bigagent/widgets/agents/organisms/agents_list.dart';
-import 'package:bigagent/widgets/common/molecules/custom_search_field.dart';
+import 'package:kinship_bots/widgets/agents/organisms/agents_list.dart';
+import 'package:kinship_bots/widgets/common/molecules/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
 class AgentsScreen extends StatelessWidget {

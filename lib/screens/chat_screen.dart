@@ -1,4 +1,4 @@
-import 'package:bigagent/widgets/chatbot/organisms/chatbot_messages_list.dart';
+import 'package:kinship_bots/widgets/chatbot/organisms/chatbot_messages_list.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {

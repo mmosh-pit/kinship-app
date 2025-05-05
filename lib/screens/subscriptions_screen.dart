@@ -1,5 +1,5 @@
-import 'package:bigagent/provider/auth_provider.dart';
-import 'package:bigagent/widgets/subscriptions/organisms/subscriptions_list.dart';
+import 'package:kinship_bots/provider/auth_provider.dart';
+import 'package:kinship_bots/widgets/subscriptions/organisms/subscriptions_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,5 +1,5 @@
-import 'package:bigagent/widgets/chats/molecules/search_text_field.dart';
-import 'package:bigagent/widgets/chats/organisms/chats_list.dart';
+import 'package:kinship_bots/widgets/chats/molecules/search_text_field.dart';
+import 'package:kinship_bots/widgets/chats/organisms/chats_list.dart';
 import 'package:flutter/material.dart';
 
 class ChatsListWrapper extends StatelessWidget {

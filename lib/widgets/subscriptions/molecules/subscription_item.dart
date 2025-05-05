@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:bigagent/provider/app_purchases_provider.dart';
-import 'package:bigagent/provider/auth_provider.dart';
+import 'package:kinship_bots/provider/app_purchases_provider.dart';
+import 'package:kinship_bots/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';

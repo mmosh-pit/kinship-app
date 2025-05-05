@@ -1,5 +1,5 @@
-import 'package:bigagent/models/product.dart';
-import 'package:bigagent/models/store_state.dart';
+import 'package:kinship_bots/models/product.dart';
+import 'package:kinship_bots/models/store_state.dart';
 
 class Purchases {
   final StoreState storeState;

@@ -1,4 +1,4 @@
-import 'package:bigagent/models/agent.dart';
+import 'package:kinship_bots/models/agent.dart';
 
 class AgentsState {
   final List<Agent> agents;

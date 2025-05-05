@@ -1,12 +1,12 @@
-import 'package:bigagent/utils/routes.dart';
-import 'package:bigagent/widgets/chatbot/molecules/chatbot_header.dart';
-import 'package:bigagent/widgets/chatbot/molecules/home_header.dart';
+import 'package:kinship_bots/utils/routes.dart';
+import 'package:kinship_bots/widgets/chatbot/molecules/chatbot_header.dart';
+import 'package:kinship_bots/widgets/chatbot/molecules/home_header.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-import 'package:bigagent/widgets/home/molecules/home_drawer_header.dart';
-import 'package:bigagent/widgets/home/molecules/home_drawer_item.dart';
-import 'package:bigagent/widgets/home/organisms/home_drawer_settings_item.dart';
+import 'package:kinship_bots/widgets/home/molecules/home_drawer_header.dart';
+import 'package:kinship_bots/widgets/home/molecules/home_drawer_item.dart';
+import 'package:kinship_bots/widgets/home/organisms/home_drawer_settings_item.dart';
 import 'package:go_router/go_router.dart';
 
 class ScaffoldWithNestedNavigation extends StatelessWidget {

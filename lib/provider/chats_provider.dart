@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bigagent/models/chat.dart';
-import 'package:bigagent/services/chat_service.dart';
+import 'package:kinship_bots/models/chat.dart';
+import 'package:kinship_bots/services/chat_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChatsProvider extends AsyncNotifier<List<Chat>> {

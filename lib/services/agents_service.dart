@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:bigagent/models/agent.dart';
-import 'package:bigagent/utils/dio_client.dart';
+import 'package:kinship_bots/models/agent.dart';
+import 'package:kinship_bots/utils/dio_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

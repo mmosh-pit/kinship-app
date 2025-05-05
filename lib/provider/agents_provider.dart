@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:bigagent/constants/error_messages.dart';
-import 'package:bigagent/models/agent.dart';
-import 'package:bigagent/models/agents_state.dart';
-import 'package:bigagent/provider/solana_provider.dart';
-import 'package:bigagent/services/agents_service.dart';
+import 'package:kinship_bots/constants/error_messages.dart';
+import 'package:kinship_bots/models/agent.dart';
+import 'package:kinship_bots/models/agents_state.dart';
+import 'package:kinship_bots/provider/solana_provider.dart';
+import 'package:kinship_bots/services/agents_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AgentsProvider extends AsyncNotifier<AgentsState> {

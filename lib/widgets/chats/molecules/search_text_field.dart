@@ -1,4 +1,4 @@
-import 'package:bigagent/widgets/common/molecules/custom_search_field.dart';
+import 'package:kinship_bots/widgets/common/molecules/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatefulWidget {

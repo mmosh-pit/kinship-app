@@ -1,5 +1,5 @@
-import 'package:bigagent/models/message.dart';
-import 'package:bigagent/widgets/common/atom/circle_avatar_image.dart';
+import 'package:kinship_bots/models/message.dart';
+import 'package:kinship_bots/widgets/common/atom/circle_avatar_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 

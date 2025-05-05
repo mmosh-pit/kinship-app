@@ -1,5 +1,5 @@
-import 'package:bigagent/models/chat.dart';
-import 'package:bigagent/utils/dio_client.dart';
+import 'package:kinship_bots/models/chat.dart';
+import 'package:kinship_bots/utils/dio_client.dart';
 
 class ChatService {
   static final _client = DioClient();

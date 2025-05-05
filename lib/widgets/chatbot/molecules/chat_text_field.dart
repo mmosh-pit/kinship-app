@@ -1,6 +1,6 @@
-import 'package:bigagent/provider/agents_provider.dart';
-import 'package:bigagent/provider/chat_provider.dart';
-import 'package:bigagent/provider/socket_provider.dart';
+import 'package:kinship_bots/provider/agents_provider.dart';
+import 'package:kinship_bots/provider/chat_provider.dart';
+import 'package:kinship_bots/provider/socket_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

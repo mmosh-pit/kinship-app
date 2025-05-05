@@ -1,6 +1,6 @@
-import 'package:bigagent/models/agent.dart';
-import 'package:bigagent/models/message.dart';
-import 'package:bigagent/models/participant.dart';
+import 'package:kinship_bots/models/agent.dart';
+import 'package:kinship_bots/models/message.dart';
+import 'package:kinship_bots/models/participant.dart';
 
 class Chat {
   final String id;

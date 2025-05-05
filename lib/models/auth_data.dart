@@ -1,4 +1,4 @@
-import 'package:bigagent/models/user.dart';
+import 'package:kinship_bots/models/user.dart';
 
 class AuthData {
   final bool isAuth;
