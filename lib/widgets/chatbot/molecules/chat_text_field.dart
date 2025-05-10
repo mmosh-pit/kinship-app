@@ -93,6 +93,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
       padding: const EdgeInsets.only(left: 10, right: 10),
       margin: EdgeInsets.only(
         bottom: MediaQuery.viewInsetsOf(context).bottom * 0.95,
+        top: 15,
       ),
       child: Row(
         spacing: 10,

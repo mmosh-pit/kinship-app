@@ -16,7 +16,6 @@ class ChatbotMessagesList extends ConsumerStatefulWidget {
 
 class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
   final _scrollController = ScrollController();
-  int _messagesLength = 0;
 
   String _profileImage =
       "https://storage.googleapis.com/mmosh-assets/avatar_placeholder.png";
@@ -25,6 +24,11 @@ class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
   void _scrollToBottom() {
     if (_scrollController.hasClients) {
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.fastOutSlowIn,
+      );
     }
   }
 
@@ -65,10 +69,10 @@ class _ChatbotMessagesListState extends ConsumerState<ChatbotMessagesList> {
                   return const Placeholder();
                 }
 
-                if (chat.messages.length > _messagesLength) {
-                  _messagesLength = chat.messages.length;
-                  _scrollToBottom();
-                }
+                Future.delayed(
+                  const Duration(milliseconds: 10),
+                  _scrollToBottom,
+                );
 
                 return ListView.builder(
                   controller: _scrollController,
